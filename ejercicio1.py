@@ -63,5 +63,5 @@ def dict(tree):
             lista[pila[2]] = code
         pass
     return lista
-b = dict("aaaaaaavbbbbf")
+b = dict(a)
 print(b)
