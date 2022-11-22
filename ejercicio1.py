@@ -21,7 +21,7 @@ def buscar(raiz,clave):
 
 import heapq
 
-def make_tree(probs):
+def tree(probs):
     q = []
     # Agregamos todos los símbolos a la pila
     for ch,pr in probs.items():
@@ -41,5 +41,27 @@ def make_tree(probs):
         heapq.heappush(q,nw_e)
     return q[0] # Devolvemos el arbol sin la fila
 
-a = make_tree({'a':0.2,'f':0.17,"1":0.13,"3":0.21,"0":0.05,"M":0.09,"T":0.15})
+a = tree({'a':0.2,'f':0.17,"1":0.13,"3":0.21,"0":0.05,"M":0.09,"T":0.15})
 print(a)
+
+
+
+def dict(tree):
+    lista = {}
+    pila = []
+    pila.append(tree+("",))
+    
+    while len(pila) > 0:
+        quitar = lista.pop()
+        if type(quitar[2]) == list:
+            pila.append(quitar[2][1]+("0",))
+            pila.append(quitar[2][0]+("1",))
+            
+            continue
+        else:
+            code = quitar[-1]
+            lista[pila[2]] = code
+        pass
+    return lista
+b = dict("aaaaaaavbbbbf")
+print(b)
