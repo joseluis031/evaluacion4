@@ -76,3 +76,42 @@ def insertar_nodo(raiz,dato,pos):
     raiz = balancear(raiz)
     actualizar_altura(raiz)
     return raiz
+
+def reemplazar(raiz):
+    aux = None
+    if raiz.derecha is None:
+        aux = raiz
+        raiz = raiz.izquierda
+        
+    else:
+        raiz.derecha, aux = reemplazar(raiz.derecha)
+    return raiz, aux
+
+def eliminar_nodo(raiz, clave):
+    x = None
+    if raiz is not None:
+        raiz.izquierda, x = eliminar_nodo(raiz.izquierda, clave)
+    elif clave > raiz.info:
+        raiz.derecha, x = eliminar_nodo(raiz.derecha, clave)
+    else:
+        x = raiz.info
+        if raiz.izquierda is None:
+            raiz = raiz.derecha
+        elif raiz.derecha is None:
+            raiz = raiz.izquierda
+        else:
+            raiz.izquierda, aux = reemplazar(raiz.izquierda)
+    raiz = balancear(raiz)
+    actualizar_altura(raiz)
+    return raiz, x
+
+def buscar(raiz,clave):
+    pos = None
+    if raiz is not None:
+        if raiz.simb == clave:
+            pos = raiz
+        elif clave < raiz.info:
+            pos = buscar(raiz.izq, clave)
+        else:
+            pos = buscar(raiz.der, clave)
+    return pos
