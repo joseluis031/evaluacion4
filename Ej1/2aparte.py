@@ -13,4 +13,18 @@ def comprimir(texto):
     return separador
 c="skodf"
 comprimir("f")
+
+def compress(dic,content):
+    res = ""
+    # Iteramos sobre cada elemento del archivo de entrada
+    for ch in content:
+        code = dic[ch]
+        res = res + code
+    # Agregamos el 1 a la izquierda, y el marcador de final
+    # a la derecha
+    res = '1' + res + dic['end']
+    # Agregamos ceros para que la longitud del resultado
+    # sea un múltiplo de 8
+    res = res + (len(res) % 8 * "0")
+    return int(res,2) # Convertimos a entero! (2 porque es base 2
             
