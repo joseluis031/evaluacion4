@@ -62,7 +62,7 @@ class Grafo():
         if not self.dirigido:
             self.agregar_arista(destino.adyacentes, dato, origen.info)
             
-    def eliminar_arista(self, vertice,destino):#self x grafo para el ej
+    def eliminar_arista(self, vertice,destino):#self x grafo para el ej para llamar a otras funciones dentro de la clase
         x = None
         if vertice.inicio.destino == destino:
             x = vertice.inicio.info
@@ -143,4 +143,55 @@ class Grafo():
                 vadyacentes = vadyacentes.sig
         return resultado
     
+    def es_adyacente(self, vertice, destino):
+        resultado = False
+        aux = vertice.adyacentes.inicio
+        while aux is not None and not resultado:
+            if aux.destino == resultado:
+                resultado = True
+            aux = aux.sig
+        return resultado
     
+    def marcar_no_visitado(self):
+        aux = self.inicio
+        while aux is not None:
+            aux.visitado = False
+            aux = aux.sig
+            
+    def barrido_vertices(self):
+        aux = self.inicio
+        while aux is not None:
+            print(aux.info)
+            aux = aux.sig
+            
+    def barrido_profundidad(self,vertice):
+        while vertice is not None:
+            if not vertice.visitado:
+                vertice.visitado = True
+                print(vertice.info)
+                adyacentes = vertice.adyacentes.inicio
+                while adyacentes is not None:
+                    adyacente = self.buscar_vertice(adyacentes.destino)
+                    if not adyacente.visitado:
+                        self.barrido_profundidad(adyacente)
+                    adyacentes = adyacentes.sig
+            vertice = vertice.sig
+    
+    def barrido_amplitud(self, vertice):
+        cola = Cola()
+        while vertice is not None:
+            if not vertice.visitado:
+                vertice.visitado = True
+                cola.arribo(vertice)
+                while not cola.cola_vacia():
+                    nodo = cola.atencion()
+                    print(nodo.info)
+                    adyacentes = nodo.adyacentes.inicio
+                    while adyacentes is not None:
+                        adyacente = self.buscar_vertice(adyacentes.destino)
+                        if not adyacente.visitado:
+                            adyacente.visitado = True
+                            cola.arribo(adyacente)
+                        adyacentes = adyacentes.sig
+                        
+            vertice = vertice.sig
