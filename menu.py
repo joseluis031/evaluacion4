@@ -43,7 +43,7 @@ def iniciar():
 
         elif opcion == '2':
             print("Enunciado del ejercicio 2...\n")
-
+      
 
         elif opcion == '3':
             print("Enunciado del ejercicio 3...\n")
