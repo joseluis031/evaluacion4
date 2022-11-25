@@ -58,8 +58,5 @@ class HuffmanTree(object):
     def get_code(self):
         self.Hu_generate(self.root, 0)
 
-if __name__=='__main__':
-    dict ={'a':0.2,'f':0.17,"1":0.13,"3":0.21,"0":0.05,"M":0.09,"T":0.15}
-    a = HuffmanTree(dict)
-    a.get_code()
+
 
